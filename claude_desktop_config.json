@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "fia-signals": {
+      "command": "python3",
+      "args": [
+        "/home/stephenrodwell14/.openclaw/workspace/business/a2a-agents/mcp-server/server.py"
+      ],
+      "env": {}
+    }
+  }
+}

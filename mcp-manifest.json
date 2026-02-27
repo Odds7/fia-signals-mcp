@@ -1,0 +1,42 @@
+{
+  "name": "fia-signals",
+  "display_name": "Fía Signals — Crypto Market Intelligence",
+  "description": "Real-time crypto market data for AI agents. Regime detection, Fear & Greed index, funding rates, technical signals, liquidation zones. No API key required for preview data.",
+  "version": "1.0.0",
+  "author": "Fía Quinn",
+  "contact": "fia-trading@agentmail.to",
+  "homepage": "https://fiasignals.com",
+  "tools": [
+    "get_market_regime",
+    "get_fear_greed",
+    "get_funding_rates",
+    "get_technical_signals",
+    "get_prices",
+    "get_liquidations",
+    "get_market_dominance",
+    "get_full_market_brief"
+  ],
+  "resources": [
+    "fiasignals://market/regime",
+    "fiasignals://market/sentiment",
+    "fiasignals://market/prices/{symbol}",
+    "fiasignals://signals/{symbol}"
+  ],
+  "prompts": [
+    "market_briefing_prompt",
+    "trading_decision_prompt"
+  ],
+  "transports": [
+    "stdio",
+    "sse"
+  ],
+  "license": "MIT",
+  "tags": [
+    "crypto",
+    "trading",
+    "bitcoin",
+    "market-data",
+    "signals",
+    "finance"
+  ]
+}

@@ -1,92 +1,94 @@
-# Fía Signals MCP Server
+# 🔮 Fia Signals MCP Server
 
-> AI-native crypto market intelligence for AI agents. Real-time regime detection, funding rates, liquidation zones, and more.
+**Real-time crypto market intelligence for AI agents.** Connect your Claude, Cursor, or any MCP-compatible AI to live market data in 60 seconds.
 
-[![MCP](https://img.shields.io/badge/MCP-compatible-blue)](https://modelcontextprotocol.io)
-[![x402](https://img.shields.io/badge/x402-USDC%20payments-green)](https://x402.org)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-
-## What is this?
-
-An MCP server that gives any AI agent (Claude, ChatGPT, Cursor, etc.) access to professional-grade crypto market intelligence:
-
-- **Market Regime Detection** — HMM-based classification: trending, ranging, volatile, breakout
-- **Fear & Greed Index** — Real-time sentiment with classification
-- **Funding Rates** — Top perpetual funding rates with annualised yields
-- **Technical Signals** — EMA, RSI, MACD, Bollinger, ADX across any symbol
-- **Live Prices** — Real-time from Binance with 24h change and volume
-- **Liquidation Data** — Recent liquidation events and cluster analysis
-- **Market Dominance** — BTC/ETH dominance and total market cap
-- **Full Market Brief** — Everything above in one call
+[![MCP Registry](https://img.shields.io/badge/MCP_Registry-Published-brightgreen)](https://registry.modelcontextprotocol.io)
+[![x402](https://img.shields.io/badge/x402-32_endpoints-blue)](https://api.fiasignals.com/.well-known/x402.json)
+[![API](https://img.shields.io/badge/API-56_routes-orange)](https://api.fiasignals.com/docs)
 
 ## Quick Start
 
-### Claude Desktop (stdio)
+### Claude Desktop
 
-Add to your `claude_desktop_config.json`:
+Add to `claude_desktop_config.json`:
 
 ```json
 {
   "mcpServers": {
     "fia-signals": {
-      "command": "python3",
-      "args": ["/path/to/server.py"]
+      "command": "npx",
+      "args": ["-y", "fia-signals-mcp"],
+      "env": {}
     }
   }
 }
 ```
 
-### HTTP/SSE (remote agents)
+### Direct API (no auth needed)
 
 ```bash
-python3 server.py --transport http --port 8403 --host 0.0.0.0
+# Gas prices across 14 chains
+curl https://api.fiasignals.com/v1/gas/prices/ethereum
+
+# Solana trending tokens
+curl https://api.fiasignals.com/v1/solana/trending
+
+# Quick smart contract audit
+curl https://api.fiasignals.com/v1/audit/quick/0xdAC17F958D2ee523a2206206994597C13D831ec7
+
+# Full Swagger docs
+open https://api.fiasignals.com/docs
 ```
 
-## Available Tools
+## 8 MCP Tools
 
-| Tool | Description | Data Source |
-|------|-------------|------------|
-| `get_market_regime` | BTC volatility regime with RSI, ADX, confidence | Binance + Bybit |
-| `get_fear_greed` | Crypto Fear & Greed Index | alternative.me |
-| `get_funding_rates` | Top N perpetual funding rates | Bybit |
-| `get_technical_signals` | Multi-indicator technical analysis | Binance |
-| `get_prices` | Real-time prices with 24h stats | Binance |
-| `get_liquidations` | Recent liquidation events | Bybit |
-| `get_market_dominance` | BTC/ETH dominance % | CoinGecko |
-| `get_full_market_brief` | Complete market brief (all above) | All sources |
+| Tool | Description |
+|------|-------------|
+| `get_market_regime` | BTC volatility regime classification (trending/ranging/volatile/breakout) with RSI, ADX, confidence level |
+| `get_fear_greed` | Crypto Fear & Greed Index with classification and historical trend |
+| `get_funding_rates` | Top perpetual funding rates across Bybit with annualised yield |
+| `get_technical_signals` | Multi-indicator technical analysis: EMA, RSI, MACD, Bollinger, ADX |
+| `get_prices` | Real-time crypto prices from Binance with 24h change and volume |
+| `get_liquidations` | Recent liquidation events and cluster analysis |
+| `get_market_dominance` | BTC/ETH dominance percentages and market cap data |
+| `get_full_market_brief` | Complete market intelligence brief — all tools in one call |
 
-## x402 Micropayments
+## REST API — 56 Endpoints
 
-This server is also available as a pay-per-call API via [x402](https://x402.org) at:
+16 AI agent services covering:
+
+- 🔥 **Gas Oracle** — 14 chains including Solana
+- 🔍 **Smart Contract Auditor** — automated security analysis
+- 🦈 **MEV Scanner** — sandwich attack & bot detection
+- 👛 **Wallet Intelligence** — risk scoring & behavior analysis
+- ☀️ **Solana Analytics** — token scanner, DeFi toolkit, rug pull detection
+- 📚 **Research Synthesis** — academic paper discovery
+- 💰 **DeFi Yield Optimizer** — cross-protocol yield comparison
+- 🪙 **Token Due Diligence** — fundamental analysis
+
+**Free endpoints** (no auth): gas prices, trending tokens, MEV bots, quick audits, quick DD, yield rates, research topics
+
+**Paid endpoints** (x402 USDC micropayments): $0.001 - $1.00 per call
+
+## x402 Pay-Per-Call
+
+AI agents can pay per API call using USDC on Base:
 
 ```
-https://x402.fiasignals.com
+GET /regime → HTTP 402 Payment Required
+Agent pays $0.001 USDC via x402 facilitator
+GET /regime (with payment proof) → 200 OK + data
 ```
 
-34 endpoints available, priced $0.001-$0.005 USDC per call on Base L2. Free preview at `/preview`.
+Discovery: [`api.fiasignals.com/.well-known/x402.json`](https://api.fiasignals.com/.well-known/x402.json)
 
-## Also Available On
+## Links
 
-- **ClaWHub**: `clawhub install fia-signals-skill` — [View on ClaWHub](https://clawhub.com/skills/k97857c0r21etwmwfvw4ab8f8h81yvja)
-- **ACP**: `https://fiasignals.com/.well-known/acp` — ChatGPT agent discovery
-- **x402 Bazaar**: `https://x402.fiasignals.com/.well-known/x402.json`
-
-## Requirements
-
-- Python 3.11+
-- `mcp` package
-- `httpx` package
-
-```bash
-pip install mcp httpx
-```
+- 📋 [API Documentation](https://api.fiasignals.com/docs)
+- 🌐 [Website](https://fiasignals.com)
+- 📦 [MCP Registry](https://registry.modelcontextprotocol.io)
+- 🛒 [ACP Manifest](https://fiasignals.com/.well-known/acp)
 
 ## License
 
 MIT
-
-## Contact
-
-- **Email**: fia-trading@agentmail.to
-- **Website**: https://fiasignals.com
-- **Telegram**: [@fiaandgreed](https://t.me/fiaandgreed)

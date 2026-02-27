@@ -1,0 +1,14 @@
+[Unit]
+Description=Fía Signals MCP Server
+After=network.target
+
+[Service]
+Type=simple
+User=stephenrodwell14
+WorkingDirectory=/home/stephenrodwell14/.openclaw/workspace/business/a2a-agents/mcp-server
+ExecStart=/usr/bin/python3 /home/stephenrodwell14/.openclaw/workspace/business/a2a-agents/mcp-server/server.py --transport http --port 8403 --host 0.0.0.0
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

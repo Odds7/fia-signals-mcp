@@ -1,82 +1,18 @@
 {
-  "name": "io.github.odds7/fia-signals-mcp",
-  "description": "AI-native crypto market intelligence MCP server. Real-time regime detection (HMM-based), funding rates, liquidation zones, Fear & Greed index, technical signals, prices across 5 exchanges, and comprehensive market briefs. Built for AI agents that trade or analyse crypto markets.",
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.Odds7/fia-signals-mcp",
+  "description": "Crypto market intelligence: regime detection, funding rates, liquidations, prices, signals.",
   "version": "1.0.0",
-  "homepage": "https://fiasignals.com",
   "repository": {
-    "type": "git",
-    "url": "https://github.com/Odds7/fia-signals-mcp"
+    "url": "https://github.com/Odds7/fia-signals-mcp.git",
+    "source": "github",
+    "subfolder": ""
   },
-  "vendor": {
-    "name": "Fia Signals",
-    "url": "https://fiasignals.com",
-    "email": "fia-trading@agentmail.to"
-  },
-  "license": "MIT",
-  "tags": [
-    "crypto",
-    "market-data",
-    "trading",
-    "bitcoin",
-    "ethereum",
-    "signals",
-    "funding-rates",
-    "liquidations",
-    "fear-greed",
-    "technical-analysis",
-    "regime-detection",
-    "defi",
-    "finance",
-    "ai-trading"
-  ],
-  "capabilities": {
-    "tools": [
-      {
-        "name": "get_market_regime",
-        "description": "BTC volatility regime classification (trending/ranging/volatile/breakout) with RSI, ADX, EMA trend, Bollinger width, and confidence level"
-      },
-      {
-        "name": "get_fear_greed",
-        "description": "Crypto Fear & Greed Index with classification and historical comparison"
-      },
-      {
-        "name": "get_funding_rates",
-        "description": "Top perpetual funding rates across Bybit with annualised yield calculations"
-      },
-      {
-        "name": "get_technical_signals",
-        "description": "Multi-indicator technical analysis for any symbol: EMA cross, RSI, MACD, Bollinger Bands, ADX"
-      },
-      {
-        "name": "get_prices",
-        "description": "Real-time crypto prices from Binance with 24h change percentage and volume"
-      },
-      {
-        "name": "get_liquidations",
-        "description": "Recent liquidation events and cluster analysis from Bybit"
-      },
-      {
-        "name": "get_market_dominance",
-        "description": "BTC and ETH market dominance percentages with total market cap"
-      },
-      {
-        "name": "get_full_market_brief",
-        "description": "Complete market intelligence brief combining regime, F&G, funding, technicals, prices, liquidations, and dominance in one call"
-      }
-    ]
-  },
-  "transports": {
-    "stdio": {
-      "command": "python3",
-      "args": ["server.py"]
-    },
-    "http": {
+  "websiteUrl": "https://fiasignals.com",
+  "remotes": [
+    {
+      "type": "streamable-http",
       "url": "https://x402.fiasignals.com/mcp"
     }
-  },
-  "distribution": {
-    "pip": {
-      "package": "fia-signals-mcp"
-    }
-  }
+  ]
 }

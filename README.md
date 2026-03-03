@@ -1,94 +1,72 @@
-# 🔮 Fia Signals MCP Server
+# Fía Signals MCP Server
 
-**Real-time crypto market intelligence for AI agents.** Connect your Claude, Cursor, or any MCP-compatible AI to live market data in 60 seconds.
+[![MCP](https://img.shields.io/badge/MCP-Compatible-blue)](https://modelcontextprotocol.io)
+[![x402](https://img.shields.io/badge/x402-Pay--per--call-green)](https://x402.fiasignals.com)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-[![MCP Registry](https://img.shields.io/badge/MCP_Registry-Published-brightgreen)](https://registry.modelcontextprotocol.io)
-[![x402](https://img.shields.io/badge/x402-32_endpoints-blue)](https://api.fiasignals.com/.well-known/x402.json)
-[![API](https://img.shields.io/badge/API-56_routes-orange)](https://api.fiasignals.com/docs)
+Professional-grade crypto market intelligence for AI agents. 8 MCP tools backed by real-time data from Binance, DeFiLlama, Etherscan, and more.
+
+## Tools
+
+| Tool | Description | Free? |
+|------|-------------|-------|
+| `get_market_regime` | Detect trending/ranging/volatile market regime | ✅ |
+| `get_crypto_signals` | BUY/SELL/HOLD with RSI, MACD, ADX, volume | ✅ |
+| `get_price_levels` | Support/resistance levels + directional bias | ✅ |
+| `get_defi_yields` | Best yields across Aave, Compound, Curve, Lido | ✅ |
+| `get_solana_tokens` | Trending Solana tokens with risk scores | ✅ |
+| `get_wallet_risk` | Wallet risk score + entity classification | x402 |
+| `scan_mev` | MEV bot detection + sandwich attack risk | x402 |
+| `audit_contract` | Smart contract quick audit (reentrancy, access control) | x402 |
 
 ## Quick Start
 
-### Claude Desktop
+### With Claude Desktop
 
-Add to `claude_desktop_config.json`:
+Add to your `claude_desktop_config.json`:
 
 ```json
 {
   "mcpServers": {
     "fia-signals": {
-      "command": "npx",
-      "args": ["-y", "fia-signals-mcp"],
-      "env": {}
+      "url": "https://fiasignals.com/.well-known/mcp.json"
     }
   }
 }
 ```
 
-### Direct API (no auth needed)
+### With any MCP client
 
 ```bash
-# Gas prices across 14 chains
-curl https://api.fiasignals.com/v1/gas/prices/ethereum
-
-# Solana trending tokens
-curl https://api.fiasignals.com/v1/solana/trending
-
-# Quick smart contract audit
-curl https://api.fiasignals.com/v1/audit/quick/0xdAC17F958D2ee523a2206206994597C13D831ec7
-
-# Full Swagger docs
-open https://api.fiasignals.com/docs
+npx @fiasignals/mcp-server
 ```
 
-## 8 MCP Tools
+## x402 Micropayments
 
-| Tool | Description |
-|------|-------------|
-| `get_market_regime` | BTC volatility regime classification (trending/ranging/volatile/breakout) with RSI, ADX, confidence level |
-| `get_fear_greed` | Crypto Fear & Greed Index with classification and historical trend |
-| `get_funding_rates` | Top perpetual funding rates across Bybit with annualised yield |
-| `get_technical_signals` | Multi-indicator technical analysis: EMA, RSI, MACD, Bollinger, ADX |
-| `get_prices` | Real-time crypto prices from Binance with 24h change and volume |
-| `get_liquidations` | Recent liquidation events and cluster analysis |
-| `get_market_dominance` | BTC/ETH dominance percentages and market cap data |
-| `get_full_market_brief` | Complete market intelligence brief — all tools in one call |
+Premium tools use x402 pay-per-call (USDC on Solana, $0.001–$0.05/call). Any agent with a Solana wallet can call instantly.
 
-## REST API — 56 Endpoints
+Discovery doc: [x402.fiasignals.com/.well-known/x402.json](https://x402.fiasignals.com/.well-known/x402.json)
 
-16 AI agent services covering:
+Wallet: `GScv2iEvgUHcYyKpbVBHMZU3ELLvhAq4hS9aD75CiErW`
 
-- 🔥 **Gas Oracle** — 14 chains including Solana
-- 🔍 **Smart Contract Auditor** — automated security analysis
-- 🦈 **MEV Scanner** — sandwich attack & bot detection
-- 👛 **Wallet Intelligence** — risk scoring & behavior analysis
-- ☀️ **Solana Analytics** — token scanner, DeFi toolkit, rug pull detection
-- 📚 **Research Synthesis** — academic paper discovery
-- 💰 **DeFi Yield Optimizer** — cross-protocol yield comparison
-- 🪙 **Token Due Diligence** — fundamental analysis
+## Virtuals Protocol ACP
 
-**Free endpoints** (no auth): gas prices, trending tokens, MEV bots, quick audits, quick DD, yield rates, research topics
+Hire as an agent-to-agent service on Virtuals Protocol:
 
-**Paid endpoints** (x402 USDC micropayments): $0.001 - $1.00 per call
+**Agent ID:** 17266 (CryptoIntel)  
+[View on ACP Marketplace](https://app.virtuals.io/acp/agent-details/17266)
 
-## x402 Pay-Per-Call
-
-AI agents can pay per API call using USDC on Base:
-
-```
-GET /regime → HTTP 402 Payment Required
-Agent pays $0.001 USDC via x402 facilitator
-GET /regime (with payment proof) → 200 OK + data
-```
-
-Discovery: [`api.fiasignals.com/.well-known/x402.json`](https://api.fiasignals.com/.well-known/x402.json)
+Offerings:
+- `free_crypto_sample` — $0.01
+- `crypto_signals` — $0.15  
+- `price_prediction` — $0.10
+- `blockchain_analysis` — $0.25
+- `yield_scanner` — $0.25
 
 ## Links
 
-- 📋 [API Documentation](https://api.fiasignals.com/docs)
 - 🌐 [Website](https://fiasignals.com)
-- 📦 [MCP Registry](https://registry.modelcontextprotocol.io)
-- 🛒 [ACP Manifest](https://fiasignals.com/.well-known/acp)
-
-## License
-
-MIT
+- 📡 [x402 Gateway](https://x402.fiasignals.com)
+- 🤖 [ACP Marketplace](https://app.virtuals.io/acp/agent-details/17266)
+- 📖 [API Docs](https://fiasignals.com/llms.txt)
+- 📊 [OpenAPI](https://fiasignals.com/openapi.json)

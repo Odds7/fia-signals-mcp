@@ -10,20 +10,18 @@ Professional-grade crypto market intelligence for AI agents. 8 MCP tools backed 
 
 | Tool | Description | Free? |
 |------|-------------|-------|
-| `get_market_regime` | Detect trending/ranging/volatile market regime | ✅ |
-| `get_crypto_signals` | BUY/SELL/HOLD with RSI, MACD, ADX, volume | ✅ |
-| `get_price_levels` | Support/resistance levels + directional bias | ✅ |
-| `get_defi_yields` | Best yields across Aave, Compound, Curve, Lido | ✅ |
-| `get_solana_tokens` | Trending Solana tokens with risk scores | ✅ |
-| `get_wallet_risk` | Wallet risk score + entity classification | x402 |
-| `scan_mev` | MEV bot detection + sandwich attack risk | x402 |
-| `audit_contract` | Smart contract quick audit (reentrancy, access control) | x402 |
+| `get_market_regime` | Detect trending/ranging/volatile/breakout market regime | ✅ Free |
+| `get_fear_greed` | Crypto Fear & Greed Index with 7-day history | ✅ Free |
+| `get_funding_rates` | Top perpetual funding rates across exchanges | ✅ Free |
+| `get_defi_yields` | Best yields across Aave, Compound, Curve, Lido | ✅ Free |
+| `get_solana_tokens` | Trending Solana tokens with risk scores | ✅ Free |
+| `get_crypto_signals` | BUY/SELL/HOLD with RSI, MACD, ADX | ✅ Free |
+| `get_wallet_risk` | Wallet risk score + entity classification | x402 $0.02 |
+| `audit_contract` | Smart contract quick audit (reentrancy, access control) | x402 $0.05 |
 
 ## Quick Start
 
-### With Claude Desktop
-
-Add to your `claude_desktop_config.json`:
+### Claude Desktop
 
 ```json
 {
@@ -35,38 +33,61 @@ Add to your `claude_desktop_config.json`:
 }
 ```
 
-### With any MCP client
+### Cursor / Windsurf
+
+Add to your MCP config:
+```
+https://fiasignals.com/.well-known/mcp.json
+```
+
+### Python (LangChain / CrewAI / AutoGen)
 
 ```bash
-npx @fiasignals/mcp-server
+pip install fia-signals-tools
+```
+
+```python
+from fia_signals_tools import get_market_regime, get_crypto_signals, LANGCHAIN_TOOLS
+
+# Standalone
+regime = get_market_regime()  # {"regime": "TRENDING_UP", "confidence": 0.8, ...}
+signals = get_crypto_signals("ETH")  # {"signal": "BUY", "rsi": 52, ...}
+
+# LangChain agent
+from langchain.agents import initialize_agent
+agent = initialize_agent(tools=LANGCHAIN_TOOLS, llm=llm)
 ```
 
 ## x402 Micropayments
 
-Premium tools use x402 pay-per-call (USDC on Solana, $0.001–$0.05/call). Any agent with a Solana wallet can call instantly.
+Premium tools (wallet risk, smart contract audit) use x402 pay-per-call. Any agent with a Solana USDC wallet can call instantly — no API keys, no setup.
 
-Discovery doc: [x402.fiasignals.com/.well-known/x402.json](https://x402.fiasignals.com/.well-known/x402.json)
+- **Discovery:** https://x402.fiasignals.com/.well-known/x402.json
+- **Wallet:** `GScv2iEvgUHcYyKpbVBHMZU3ELLvhAq4hS9aD75CiErW`
+- **Price:** $0.001–$0.50/call
 
-Wallet: `GScv2iEvgUHcYyKpbVBHMZU3ELLvhAq4hS9aD75CiErW`
+## Virtuals Protocol ACP (Agent-to-Agent Hiring)
 
-## Virtuals Protocol ACP
+Hire CryptoIntel directly via the Virtuals ACP marketplace. Agent-to-agent escrow payments.
 
-Hire as an agent-to-agent service on Virtuals Protocol:
+**Agent ID:** 17266  
+[→ View on ACP Marketplace](https://app.virtuals.io/acp/agent-details/17266)
 
-**Agent ID:** 17266 (CryptoIntel)  
-[View on ACP Marketplace](https://app.virtuals.io/acp/agent-details/17266)
-
-Offerings:
-- `free_crypto_sample` — $0.01
-- `crypto_signals` — $0.15  
-- `price_prediction` — $0.10
-- `blockchain_analysis` — $0.25
-- `yield_scanner` — $0.25
+| Offering | Price | Description |
+|----------|-------|-------------|
+| `free_crypto_sample` | $0.01 | Regime + BTC price + gas snapshot |
+| `crypto_signals` | $0.15 | BUY/SELL/HOLD with RSI, ADX, MACD |
+| `price_prediction` | $0.10 | Support/resistance + directional bias |
+| `blockchain_analysis` | $0.25 | Token metrics + on-chain data |
+| `yield_scanner` | $0.25 | Best DeFi yields across protocols |
 
 ## Links
 
-- 🌐 [Website](https://fiasignals.com)
-- 📡 [x402 Gateway](https://x402.fiasignals.com)
-- 🤖 [ACP Marketplace](https://app.virtuals.io/acp/agent-details/17266)
-- 📖 [API Docs](https://fiasignals.com/llms.txt)
-- 📊 [OpenAPI](https://fiasignals.com/openapi.json)
+| Resource | URL |
+|----------|-----|
+| 🌐 Website | https://fiasignals.com |
+| 📡 x402 Gateway | https://x402.fiasignals.com |
+| 🤖 ACP Marketplace | https://app.virtuals.io/acp/agent-details/17266 |
+| 📖 llms.txt | https://fiasignals.com/llms.txt |
+| 📊 OpenAPI | https://fiasignals.com/openapi.json |
+| 🔌 MCP Discovery | https://fiasignals.com/.well-known/mcp.json |
